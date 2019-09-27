@@ -15,12 +15,12 @@ class Line1D:
 
     def __init__(self, p1, p2):
         """Initiale points for a 2D line."""
-        self.p1 = Point1D(p1)
-        self.p2 = Point1D(p2)
+        self.p1 = p1  # Point1D
+        self.p2 = p2  # Point1D
 
     def get_center(self, a, b):
         """Get Center Point."""
-        print(type(a), type(b))
+        # print(type(a), a.data, b.data, type(b))
         return (a.data+b.data)/2
 
     def get_line_points(self, approx):
@@ -28,25 +28,26 @@ class Line1D:
         # self.point_list = list()
         # self.center = self.get_center(self.p1, self.p2)
         point_list = []
-        pre = self.get_center(self.p1, self.p2)
+        pre = Point1D(self.get_center(self.p1, self.p2))
+        # print('pre', type(pre))
         point_list.append(pre)
-        print(pre.data)
+        # print(pre)
         """
         !!! DARF AUCH P2 <P1 SEIN?
         !!! vllt alles in self speichern?
         """
-        approx = 2
+        # approx = 2
         x0 = min(self.p1, self.p2)
-        print('x0: ', type(x0))
+        # print('x0: ', type(x0.data))
         for k in range(1, approx):
-            pre = self.get_center(x0, pre)
+            pre = Point1D(self.get_center(x0, pre))
             dist = x0.get_distance(pre)
-            point_list.append(pre.data)
-            for i in range(1, 2**approx):
+            point_list.append(pre)
+            for i in range(1, 2**k):
                 point_list.append(pre+dist*(2*i))
         # print(self.point_list)
         # return sorted(self.point_list)
-        print(point_list)
+        # print(point_list)
         return sorted(point_list)
 
     @property
@@ -269,13 +270,35 @@ def main():
                         [-10, -2.5, 5.0, 12.5, 20],
                         [-10, -6.25, -2.5, 1.25, 5.0,  8.75, 12.5, 16.25, 20]]
 
+    line1D_Point1D_test_list = [Point1D(-10),
+                                Point1D(-6.25),
+                                Point1D(-2.5),
+                                Point1D(1.25),
+                                Point1D(5.0),
+                                Point1D(8.75),
+                                Point1D(12.5),
+                                Point1D(16.25),
+                                Point1D(20)
+                                ]
     p11 = Point1D(-10)
     p12 = Point1D(20)
 
     l11 = Line1D(p11, p12)
 
-    print(l11.get_line_points(1))
-    assert l11.get_line_points(1) == line1D_test_list[0]
+    line_points = l11.get_line_points(3)
+    # print(line_points)
+    line_points.insert(0, p11)
+    line_points.append(p12)
+    for i in line_points:
+        print(type(i.data))
+    for i in line1D_Point1D_test_list:
+        print(type(i.data))
+    for i, j in zip(line1D_Point1D_test_list, line_points):
+        print(i.data, j.data)
+        assert i.data == j.data
+    print((line_points))
+    print((line1D_Point1D_test_list))
+    assert line_points == line1D_Point1D_test_list  # line1D_test_list[2]
 
     p21 = Point2D(1, 1)
     p22 = Point2D(2, 2)
