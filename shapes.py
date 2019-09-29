@@ -22,18 +22,13 @@ class Line1D:
     def data(self):
         """Return data."""
         return self.p1, self.p2
-    #
-    # def get_center(self, a, b):
-    #     """Get Center Point."""
-    #     # print(type(a), a.data, b.data, type(b))
-    #     return (a.data+b.data)/2
 
     def get_line_points(self, approx):
         """Get points on the line between line-points."""
         # self.point_list = list()
         # self.center = self.get_center(self.p1, self.p2)
         point_list = []
-        pre = Point1D(self.p1.get_center(self.p2))
+        pre = self.p1.get_center(self.p2)
         # print('pre', type(pre))
         point_list.append(pre)
         # print(pre)
@@ -45,7 +40,7 @@ class Line1D:
         x0 = min(self.p1, self.p2)
         # print('x0: ', type(x0.data))
         for k in range(1, approx):
-            pre = Point1D(x0.get_center(pre))
+            pre = x0.get_center(pre)
             dist = x0.get_distance(pre)
             point_list.append(pre)
             for i in range(1, 2**k):
@@ -72,18 +67,35 @@ class Line2D:
         self.p1 = Point2D(p1[0], p1[1])
         self.p2 = Point2D(p2[0], p2[1])
 
-    # def get_line_points(self, approx):
-    #     """Get n points on the line between line-points."""
-    #     point_list = list()
-    #     point_list.append(self.p1)
-    #     for i in range(approx):
-    #         point_list.append(Point2D(
-    #             (self.p1[0].data - self.p2[0].data)*(1-i/approx), (self.p1[1].data - self.p2[1].data))*(1-i/approx))
-
     @property
     def data(self):
         """Return data."""
         return self.p1, self.p2
+
+    def get_line_points(self, approx):
+        """Get points on the line between line-points."""
+        point_list = []
+        pre = self.p1.get_center(self.p2)
+        point_list.append(pre)
+        xy = min(self.p1, self.p2)
+        print('x0: ', type(xy), xy)
+        for k in range(1, approx):
+            pre = xy.get_center(pre)
+            print('pre', type(pre))
+            print('pre0', pre.x)
+            print('pre1', pre.y)
+            distx = Point1D(xy.x).get_distance(Point1D(pre.x))
+            disty = Point1D(xy.y).get_distance(Point1D(pre.y))
+            print('dist', distx, disty)
+            point_list.append(pre)
+            for i in range(1, 2**k):
+                print('k: ', i)
+                point_list.append(Point2D(pre.x+distx*(2*i),
+                                          pre.y+disty*(2*i)))
+                # print(self.point_list)
+                # return sorted(self.point_list)
+                # print(point_list)
+        return sorted(point_list)
 
     def __repr__(self):
         """Return the information."""
@@ -107,6 +119,31 @@ class Line3D:
         """Return data."""
         return self.p1, self.p2
 
+    def get_line_points(self, approx):
+        """Get points on the line between line-points."""
+        point_list = []
+        pre = self.p1.get_center(self.p2)
+        point_list.append(pre)
+        xyz = min(self.p1, self.p2)
+        print('x0: ', type(xyz), xyz)
+        for k in range(1, approx):
+            pre = xyz.get_center(pre)
+            print('pre', type(pre))
+            print('pre0', pre.x)
+            print('pre1', pre.y)
+            print('pre3', pre.z)
+            distx = Point1D(xyz.x).get_distance(Point1D(pre.x))
+            disty = Point1D(xyz.y).get_distance(Point1D(pre.y))
+            distz = Point1D(xyz.z).get_distance(Point1D(pre.z))
+            print('dist', distx, disty, distz)
+            point_list.append(pre)
+            for i in range(1, 2**k):
+                print('k: ', i)
+                point_list.append(Point3D(pre.x+distx*(2*i),
+                                          pre.y+disty*(2*i),
+                                          pre.z+distz*(2*i)))
+        return sorted(point_list)
+
     def __repr__(self):
         """Return the information."""
         return f"{self.p1}, {self.p2}"
@@ -127,7 +164,7 @@ class Circle(Point2D):
         self.orbit = 2 * pi * r
         self.area = pi * r**2
 
-    def get_rads(self, n):
+    def get_rad_list(self, n):
         """Calculate the rad for i=1...n."""
         return [(2*pi*i-2*pi)/n for i in range(1, n+1)]
 
@@ -139,7 +176,7 @@ class Circle(Point2D):
         x' = cos(alpha) * r + x
         y' = sin(alpha) * r + y
         """
-        for i in self.get_rads(approx):
+        for i in self.get_rad_list(approx):
             orbit_points.append(Point2D(cos(i)*self.r[0]+self.x,
                                         sin(i)*self.r[0]+self.y))
         return orbit_points
@@ -148,7 +185,7 @@ class Circle(Point2D):
         """Calculate n points for the orbit with rotation matrix."""
         orbit_points = list()
         """Rotation Matrix."""
-        for i in self.get_rads(approx):
+        for i in self.get_rad_list(approx):
             orbit_points.append(
                 Point2D(
                     self.x+(self.r[0]*cos(i)-self.r[1]*sin(i)),
@@ -182,7 +219,7 @@ class Sphere(Point3D):
         self.surface = 4 * pi * r**2
         self.volume = 4/3 * pi * r**3
 
-    def get_rads(self, n):
+    def get_rad_list(self, n):
         """Calculate the rad for i=1...n."""
         return [(2*pi*i-2*pi)/n for i in range(1, n+1)]
 
@@ -196,7 +233,7 @@ class Sphere(Point3D):
         orbit_points = list()
         if xy_axis:  # rotate on z
             self.r = 1, 0, 0
-            for i in self.get_rads(approx):
+            for i in self.get_rad_list(approx):
                 orbit_points.append(
                     Point3D(
                         self.x+(
@@ -214,7 +251,7 @@ class Sphere(Point3D):
                     ))
         if yz_axis:  # rotate on x
             self.r = 0, 1, 0
-            for i in self.get_rads(approx):
+            for i in self.get_rad_list(approx):
                 orbit_points.append(
                     Point3D(
                         self.x+(
@@ -232,7 +269,7 @@ class Sphere(Point3D):
                     ))
         if zx_axis:  # rotate on y
             self.r = 0, 0, 1
-            for i in self.get_rads(approx):
+            for i in self.get_rad_list(approx):
                 orbit_points.append(
                     Point3D(
                         self.x+(
@@ -266,10 +303,6 @@ class Sphere(Point3D):
 
 def main():
     """Call the main function."""
-    line1D_test_list = [[-10, 5.0, 20],
-                        [-10, -2.5, 5.0, 12.5, 20],
-                        [-10, -6.25, -2.5, 1.25, 5.0,  8.75, 12.5, 16.25, 20]]
-
     line1D_Point1D_test_list = [Point1D(-10),
                                 Point1D(-6.25),
                                 Point1D(-2.5),
@@ -285,36 +318,43 @@ def main():
 
     l11 = Line1D(p11, p12)
 
-    line_points = l11.get_line_points(3)
-    # print(line_points)
-    line_points.insert(0, p11)
-    line_points.append(p12)
-    for i in line_points:
-        print(type(i.data))
-    for i in line1D_Point1D_test_list:
-        print(type(i.data))
-    for i, j in zip(line1D_Point1D_test_list, line_points):
-        print(i.data, j.data)
+    line_points1 = l11.get_line_points(3)
+    line_points1.insert(0, p11)
+    line_points1.append(p12)
+    for i, j in zip(line1D_Point1D_test_list, line_points1):
         assert i.data == j.data
-    print((line_points))
-    print((line1D_Point1D_test_list))
-    assert line_points == line1D_Point1D_test_list  # line1D_test_list[2]
 
-    p21 = Point2D(1, 1)
-    p22 = Point2D(2, 2)
+    p21 = Point2D(-10, -10)
+    p22 = Point2D(20, 20)
 
     l21 = Line2D(p21.data, p22.data)
-    l22 = Line2D((1, 1), (2, 2))
+    l22 = Line2D((-10, -10), (20, 20))
     assert l21.data[0].data == l21.p1.data == l22.data[0].data == l22.p1.data
     assert l21.data[1].data == l21.p2.data == l22.data[1].data == l22.p2.data
 
-    p31 = Point3D(1, 1, 1)
-    p32 = Point3D(2, 2, 2)
+    line_points2 = l21.get_line_points(3)
+    print('test: ', line_points2)
+    line_points2.insert(0, p21)
+    line_points2.append(p22)
+    for i in line_points2:
+        print(type(i), i.data)
+    # print(l21.data[0].data, l21.p1.data, l22.data[0].data, l22.p1.data,
+    #       l21.data[1].data, l21.p2.data, l22.data[1].data, l22.p2.data)
+
+    p31 = Point3D(-10, -10, -10)
+    p32 = Point3D(20, 20, 20)
 
     l31 = Line3D(p31.data, p32.data)
-    l32 = Line3D((1, 1, 1), (2, 2, 2))
+    l32 = Line3D((-10, -10, -10), (20, 20, 20))
     assert l31.data[0].data == l31.p1.data == l32.data[0].data == l32.p1.data
     assert l31.data[1].data == l31.p2.data == l32.data[1].data == l32.p2.data
+
+    line_points3 = l31.get_line_points(3)
+    print('test: ', line_points3)
+    line_points3.insert(0, p31)
+    line_points3.append(p32)
+    for i in line_points3:
+        print(type(i), i.data)
 
     orbit_test_list = [(1.0, 0.0), (0.707107, 0.707107),
                        (0.0, 1.0), (-0.707107, 0.707107),

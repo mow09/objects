@@ -25,8 +25,8 @@ class Point1D:
 
     def get_center(self, other):
         """Get Center Point."""
-        print(type(self.x), self.x, other.x, type(other.x))
-        return (self.x+other.x)/2
+        # print(type(self.x), self.x, other.x, type(other.x))
+        return Point1D((self.x+other.x)/2)
 
     def __add__(self, other):
         """Return addition for add operation."""
@@ -58,15 +58,20 @@ class Point2D(Point1D):
         self.y = Point1D(y).data
         self.position = self.x, self.y
 
+    @property
+    def data(self):
+        """Return data."""
+        return self.x, self.y
+
     def get_distance(self, other):
         """Calculate the euclidean distance."""
         assert type(self) == type(other)
         return sqrt((self.x - other.x)**2+(self.y - other.y)**2)
 
-    @property
-    def data(self):
-        """Return data."""
-        return self.x, self.y
+    def get_center(self, other):
+        """Get Center Point."""
+        # print(type(self.x), self.x, other.x, type(other.x))
+        return Point2D((self.x+other.x)/2, (self.y+other.y)/2)
 
     def __repr__(self):
         """Return the information."""
@@ -87,6 +92,11 @@ class Point3D(Point2D):
         self.z = Point1D(z).data
         self.position = self.x, self.y, self.z
 
+    @property
+    def data(self):
+        """Return data."""
+        return self.x, self.y, self.z
+
     def get_distance(self, other):
         """Calculate the euclidean distance."""
         assert type(self) == type(other)
@@ -94,10 +104,12 @@ class Point3D(Point2D):
                     + (self.y - other.y)**2
                     + (self.z - other.z)**2)
 
-    @property
-    def data(self):
-        """Return data."""
-        return self.x, self.y, self.z
+    def get_center(self, other):
+        """Get Center Point."""
+        # print(type(self.x), self.x, other.x, type(other.x))
+        return Point3D((self.x+other.x)/2,
+                       (self.y+other.y)/2,
+                       (self.z+other.z)/2)
 
     def __repr__(self):
         """Return the information."""
@@ -128,6 +140,13 @@ def main():
     assert round(dist2, 6) == 1.414214
     dist3 = p31.get_distance(p32)
     assert round(dist3, 6) == 1.732051
+
+    cent1 = p11.get_center(p12)
+    assert cent1.data == 1.5
+    cent2 = p21.get_center(p22)
+    assert cent2.data == (1.5, 1.5)
+    cent3 = p31.get_center(p32)
+    assert cent3.data == (1.5, 1.5, 1.5)
 
 
 if __name__ == '__main__':
