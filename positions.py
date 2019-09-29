@@ -12,22 +12,23 @@ class Point1D:
         self.x = x
         self.position = self.x
 
+    @property
+    def data(self):
+        """Return data."""
+        return self.x
+
     def get_distance(self, other):
         """Calculate the euclidean distance."""
         # print(type(self.data), type(other.data))
         # assert type(self.data) == type(other)
         return sqrt((self.data - other.data)**2)
 
-    @property
-    def data(self):
-        """Return data."""
-        return self.x
-
     def __add__(self, other):
         """Return addition for add operation."""
         return Point1D((self.x + other))
 
     def __truediv__(self, other):
+        """Return devision for div operation."""
         return Point1D((self.x / other))
 
     def __lt__(self, other):
