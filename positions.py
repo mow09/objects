@@ -23,6 +23,11 @@ class Point1D:
         # assert type(self.data) == type(other)
         return sqrt((self.data - other.data)**2)
 
+    def get_center(self, other):
+        """Get Center Point."""
+        print(type(self.x), self.x, other.x, type(other.x))
+        return (self.x+other.x)/2
+
     def __add__(self, other):
         """Return addition for add operation."""
         return Point1D((self.x + other))

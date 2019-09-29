@@ -18,17 +18,22 @@ class Line1D:
         self.p1 = p1  # Point1D
         self.p2 = p2  # Point1D
 
-    def get_center(self, a, b):
-        """Get Center Point."""
-        # print(type(a), a.data, b.data, type(b))
-        return (a.data+b.data)/2
+    @property
+    def data(self):
+        """Return data."""
+        return self.p1, self.p2
+    #
+    # def get_center(self, a, b):
+    #     """Get Center Point."""
+    #     # print(type(a), a.data, b.data, type(b))
+    #     return (a.data+b.data)/2
 
     def get_line_points(self, approx):
         """Get points on the line between line-points."""
         # self.point_list = list()
         # self.center = self.get_center(self.p1, self.p2)
         point_list = []
-        pre = Point1D(self.get_center(self.p1, self.p2))
+        pre = Point1D(self.p1.get_center(self.p2))
         # print('pre', type(pre))
         point_list.append(pre)
         # print(pre)
@@ -40,7 +45,7 @@ class Line1D:
         x0 = min(self.p1, self.p2)
         # print('x0: ', type(x0.data))
         for k in range(1, approx):
-            pre = Point1D(self.get_center(x0, pre))
+            pre = Point1D(x0.get_center(pre))
             dist = x0.get_distance(pre)
             point_list.append(pre)
             for i in range(1, 2**k):
@@ -49,11 +54,6 @@ class Line1D:
         # return sorted(self.point_list)
         # print(point_list)
         return sorted(point_list)
-
-    @property
-    def data(self):
-        """Return data."""
-        return self.p1, self.p2
 
     def __repr__(self):
         """Return the information."""
