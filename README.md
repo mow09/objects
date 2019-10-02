@@ -2,10 +2,10 @@
 Excuse the missing doc.
 
 # Positions
-Positions are specific points in n Dimensions [! n \in (1,2,3)](https://latex.codecogs.com/gif.latex?n%20%5Cin%20%281%2C2%2C3%29)
+Positions are specific points in n Dimensions ![n \in (1,2,3)](https://latex.codecogs.com/gif.latex?n%20%5Cin%20%281%2C2%2C3%29)
 
 `get_distance()`
-[! d(\mathbf{p,q})=\sqrt{\sum_{i=1}^n(p_i-q_i)^2}](https://latex.codecogs.com/gif.latex?d%28%5Cmathbf%7Bp%2Cq%7D%29%3D%5Csqrt%7B%5Csum_%7Bi%3D1%7D%5En%28p_i-q_i%29%5E2%7D)
+![d(\mathbf{p,q})=\sqrt{\sum_{i=1}^n(p_i-q_i)^2}](https://latex.codecogs.com/gif.latex?d%28%5Cmathbf%7Bp%2Cq%7D%29%3D%5Csqrt%7B%5Csum_%7Bi%3D1%7D%5En%28p_i-q_i%29%5E2%7D)
 # Shapes
 
 # objects are positions and shapes...
