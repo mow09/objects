@@ -65,7 +65,7 @@ class Point2D(Point1D):
 
     def get_distance(self, other):
         """Calculate the euclidean distance."""
-        assert type(self) == type(other)
+        assert self.__class__ == other.__class__
         return sqrt((self.x - other.x)**2+(self.y - other.y)**2)
 
     def get_center(self, other):
@@ -99,7 +99,7 @@ class Point3D(Point2D):
 
     def get_distance(self, other):
         """Calculate the euclidean distance."""
-        assert type(self) == type(other)
+        assert self.__class__ == other.__class__
         return sqrt((self.x - other.x)**2
                     + (self.y - other.y)**2
                     + (self.z - other.z)**2)
