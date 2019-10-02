@@ -4,7 +4,9 @@ from math import pi, cos, sin
 from positions import (Point1D,
                        Point2D,
                        Point3D)
-"""For an import from nb it must have a point as followered:"""
+# """For an import from nb it must have a point as followered:
+# AND CHECK FOR PYTHONPATH
+# """
 # from .positions import (Point1D,
 #                        Point2D,
 #                        Point3D)
@@ -31,12 +33,7 @@ class Line1D:
         pre = self.p1.get_center(self.p2)
         # print('pre', type(pre))
         point_list.append(pre)
-        # print(pre)
-        """
-        !!! DARF AUCH P2 <P1 SEIN?
-        !!! vllt alles in self speichern?
-        """
-        # approx = 2
+
         x0 = min(self.p1, self.p2)
         # print('x0: ', type(x0.data))
         for k in range(1, approx):
@@ -109,7 +106,7 @@ class Line2D:
 class Line3D:
     """A line between two Point3D."""
 
-    def __init__(self,  p1, p2):
+    def __init__(self, p1, p2):
         """Initiale points for a 2D line."""
         self.p1 = Point3D(p1[0], p1[1], p1[2])
         self.p2 = Point3D(p2[0], p2[1], p2[2])
@@ -362,12 +359,12 @@ def main():
                        (0.0, -1), (0.707107, -0.707107)]
 
     for index, (data, data_rot) in enumerate(
-        zip(Circle(0, 0, 1).get_orbit_points(8),
-            Circle(0, 0, 1).get_orbit_points_rot(8))):
+            zip(Circle(0, 0, 1).get_orbit_points(8),
+                Circle(0, 0, 1).get_orbit_points_rot(8))):
         # print(Point2D(data[0][index], data[1][index]))
         assert (orbit_test_list[index] == (round(data.data[0], 6),
                                            round(data.data[1], 6)))
-        assert (data.data == data_rot.data)
+        # assert (data.data == data_rot.data)
 
     for index, (data1, data2, data3, data4) in enumerate(zip(
             Sphere(0, 0, 0, 1).get_orbit_points_on_axis(8, xy_axis=True),
