@@ -1,11 +1,16 @@
+<script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?
+config=TeX-MML-AM_CHTML"
+</script>
+
 # Project in Process !
 Excuse the missing doc.
 
 # Positions
-Positions are specific points in n Dimensions n\in(1,2,3)
+Positions are specific points in n Dimensions $$n\in(1,2,3)$$
 
 `get_distance()`
-d(\mathbf{p,q})=\sqrt{\sum_{i=1}^n(p_i-q_i)^2}
+$$d(\mathbf{p,q})=\sqrt{\sum_{i=1}^n(p_i-q_i)^2}$$
 # Shapes
 
 # objects are positions and shapes...
