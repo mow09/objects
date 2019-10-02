@@ -1,4 +1,4 @@
-![\Large d(\mathbf{p,q})=\sqrt{\sum_{i=1}^n(p_i-q_i)^2}](https://latex.codecogs.com/svg.latex?x%3D%5Cfrac%7B-b%5Cpm%5Csqrt%7Bb%5E2-4ac%7D%7D%7B2a%7D)
+![\Large d(\mathbf{p,q})=\sqrt{\sum_{i=1}^n(p_i-q_i)^2}](https://latex.codecogs.com/gif.latex?d%28%5Cmathbf%7Bp%2Cq%7D%29%3D%5Csqrt%7B%5Csum_%7Bi%3D1%7D%5En%28p_i-q_i%29%5E2%7D)
 
 
 
