@@ -24,7 +24,7 @@ to calculate the center points....
 - [x] get_distance
 - [x] get_center
 - shapes
-- ``[ ] get_line_points( )``
+- [x] ``get_line_points( )``
 
 - over powered using the get_distance from Point1D in Line2D or simple math?!
 
