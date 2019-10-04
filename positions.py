@@ -32,6 +32,10 @@ class Point1D:
         """Return addition for add operation."""
         return Point1D((self.x + other))
 
+    def __mul__(self, other):
+        """Retrun multiplication of Point with Skalar."""
+        return Point1D(self.x * other)
+
     def __truediv__(self, other):
         """Return devision for div operation."""
         return Point1D((self.x / other))
@@ -72,6 +76,10 @@ class Point2D(Point1D):
         """Get Center Point."""
         # print(type(self.x), self.x, other.x, type(other.x))
         return Point2D((self.x+other.x)/2, (self.y+other.y)/2)
+
+    def __mul__(self, other):
+        """Retrun multiplication of Point with Skalar."""
+        return Point2D(self.x * other, self.y * other)
 
     def __repr__(self):
         """Return the information."""
@@ -126,9 +134,13 @@ def main():
     p12 = Point1D(2)
     assert p12.position == (2) == p12.data
 
+    print(p11*5)
+
     p21 = Point2D(1, 1)
     p22 = Point2D(2, 2)
     assert p22.position == (2, 2) == p22.data
+
+    print(p22*5)
 
     p31 = Point3D(1, 1, 1)
     p32 = Point3D(2, 2, 2)

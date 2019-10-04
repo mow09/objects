@@ -1,15 +1,15 @@
 """A file for mathematic objects in coordinate systems."""
 
 from math import pi, cos, sin
-from positions import (Point1D,
-                       Point2D,
-                       Point3D)
+# from positions import (Point1D,
+#                        Point2D,
+#                        Point3D)
 # """For an import from nb it must have a point as followered:
 # AND CHECK FOR PYTHONPATH
 # """
-# from .positions import (Point1D,
-#                        Point2D,
-#                        Point3D)
+from .positions import (Point1D,
+                        Point2D,
+                        Point3D)
 
 
 class Line1D:

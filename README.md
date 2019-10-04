@@ -2,7 +2,7 @@
 Excuse the missing doc.
 
 # Positions
-Positions are specific points in n Dimensions ![k = {1,2,3}](https://latex.codecogs.com/gif.latex?k%20%3D%20%7B1%2C2%2C3%7D)
+Positions are specific points in k Dimensions ![k = {1,2,3}](https://latex.codecogs.com/gif.latex?k%20%3D%20%7B1%2C2%2C3%7D)
 
 `get_distance()`
 
