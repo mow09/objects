@@ -134,13 +134,13 @@ def main():
     p12 = Point1D(2)
     assert p12.position == (2) == p12.data
 
-    print(p11*5)
+    # print(p11*5)
 
     p21 = Point2D(1, 1)
     p22 = Point2D(2, 2)
     assert p22.position == (2, 2) == p22.data
 
-    print(p22*5)
+    # print(p22*5)
 
     p31 = Point3D(1, 1, 1)
     p32 = Point3D(2, 2, 2)
@@ -159,6 +159,8 @@ def main():
     assert cent2.data == (1.5, 1.5)
     cent3 = p31.get_center(p32)
     assert cent3.data == (1.5, 1.5, 1.5)
+
+    print('\n\n\tThe main just contains tests.\n')
 
 
 if __name__ == '__main__':

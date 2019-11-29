@@ -1,5 +1,8 @@
 """A file for mathematic objects in coordinate systems."""
 
+from positions import (Point1D,
+                       Point2D,
+                       Point3D)
 from math import pi, cos, sin
 # from positions import (Point1D,
 #                        Point2D,
@@ -7,9 +10,10 @@ from math import pi, cos, sin
 # """For an import from nb it must have a point as followered:
 # AND CHECK FOR PYTHONPATH
 # """
-from .positions import (Point1D,
-                        Point2D,
-                        Point3D)
+import sys
+import os
+myPath = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, myPath + '/')
 
 
 class Line1D:
@@ -386,6 +390,8 @@ def main():
                 round(data2.data[0], 6) ==
                 round(data3.data[1], 6) ==
                 0)
+
+    print('\n\n\tThe main just contains tests.\n')
 
 
 if __name__ == "__main__":
