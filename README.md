@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/mow09/objects.svg?token=3YzpCr7zqrJRwks2k22w&branch=master)](https://travis-ci.com/mow09/objects)
+[![codecov](https://codecov.io/gh/mow09/objects/branch/master/graph/badge.svg?token=ZYABVH5NZ8)](https://codecov.io/gh/mow09/objects)
 
 # Positions
 Positions are specific points in k dimensions ![k = {1,2,3}](https://latex.codecogs.com/gif.latex?k%20%3D%20%7B1%2C2%2C3%7D)
