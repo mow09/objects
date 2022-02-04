@@ -19,7 +19,7 @@ jobs:
           name: Run Tests
           command: |
             coverage run -m pytest
-            coveragre report
+            coverage report
             coverage html
       - store_artifacts:
           path: htmlcov
