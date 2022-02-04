@@ -1,5 +1,7 @@
 
-version: 2
+version: 2.1
+orbs:
+  coveralls: coveralls/coveralls@1.0.6
 jobs:
   build:  # required for runs that don't use workflows
     working_directory: ~/objects
@@ -23,3 +25,20 @@ jobs:
             coverage html
       - store_artifacts:
           path: htmlcov
+  done:
+    docker:
+      - image: circleci/node:10.0.0
+    steps:
+      - coveralls/upload:
+          parallel_finished: true
+workflows:
+  test_objects:
+    jobs:
+      - build
+      - done:
+          requires:
+            - build
+
+# notify:
+#   webhooks:
+#     - url: https://coveralls.io/webhook?repo_token=${process.env.COVERALLS_REPO_TOKEN}
