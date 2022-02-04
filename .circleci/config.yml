@@ -16,15 +16,19 @@ jobs:
           name: Setup testing environment
           command: |
             pip install -r requirements.txt
+            pip install coverage-lcov
       - run:
           name: Run Tests
           command: |
             mkdir coverage/
-            touch coverage/lcov.info
+        # touch coverage/lcov.info
             coverage run -m pytest
             coverage report
             coverage html
-      # - run:
+            # Point to a different .coverage file path
+            coverage-lcov --data_file_path .coverage
+            # Write the output to a different file path
+            coverage-lcov --output_file_path coverage/lcov.info      # - run:
       #     name: Install and Make
       #     command: 'npm install && make test-coverage'
       # cp htmlcov/index.html ./coverage/lcov.info
@@ -36,8 +40,9 @@ jobs:
       #
       # - store_artifacts:
       #     path: test-results
-      - coveralls/upload:
-          path_to_lcov: htmlcov/status.json
+      - coveralls/upload
+      # - coveralls/upload:
+          # path_to_lcov: htmlcov/status.json
       - store_artifacts:
           path: htmlcov
       - store_artifacts:
