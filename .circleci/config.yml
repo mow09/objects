@@ -5,7 +5,7 @@ jobs:
   build:  # required for runs that don't use workflows
     working_directory: ~/objects
     docker:
-      - image: cimg/python:3.6
+      - image: cimg/python:3.6-node
         auth:
           username: $DOCKERHUB_LOGIN
           password: $DOCKERHUB_PASSWORD
@@ -32,33 +32,32 @@ jobs:
       #
       # - store_artifacts:
       #     path: test-results
-      # - coveralls/upload
+      - coveralls/upload
       - store_artifacts:
           path: htmlcov
       - store_artifacts:
           path: .coverage
-      - store_artifacts:
-          path: report
+
       # - coveralls/upload:
       #     file: htmlcov/index.html
       # - store_artifacts: # upload test coverage as artifact
       #     path: ./coverage/lcov.info
       #     prefix: tests
-  done:
-   docker:
-     - image: circleci/node:10.0.0
-     # - image: cimg/python:3.6
-   steps:
-     - coveralls/upload:
-         parallel_finished: true
-workflows:
-  test_objects:
-    jobs:
-      - build
-      - done:
-          requires:
-            - build
-
-notify:
-  webhooks:
-    - url: https://coveralls.io/webhook?repo_token=${process.env.COVERALLS_REPO_TOKEN}
+#   done:
+#    docker:
+#      - image: circleci/node:10.0.0
+#      # - image: cimg/python:3.6
+#    steps:
+#      - coveralls/upload:
+#          parallel_finished: true
+# workflows:
+#   test_objects:
+#     jobs:
+#       - build
+#       - done:
+#           requires:
+#             - build
+#
+# notify:
+#   webhooks:
+#     - url: https://coveralls.io/webhook?repo_token=${process.env.COVERALLS_REPO_TOKEN}
