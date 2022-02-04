@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   coveralls: coveralls/coveralls@1.0.6
-  codecov: codecov/codecov@1.0.2
+  # codecov: codecov/codecov@1.0.2
 jobs:
   build:  # required for runs that don't use workflows
     working_directory: ~/objects
@@ -35,27 +35,29 @@ jobs:
       #     path: test-results
       # - coveralls/upload
       - store_artifacts:
-          path: report
-      - codecov/upload:
-          file: report
+          path: htmlcob
+      - coveralls/upload:
+          file: htmlcov/index.html
+      # - codecov/upload:
+      #     file: html
       # - store_artifacts: # upload test coverage as artifact
       #     path: ./coverage/lcov.info
       #     prefix: tests
 
-  done:
-   docker:
-     - image: circleci/node:10.0.0
-     # - image: cimg/python:3.6
-   steps:
-     - coveralls/upload:
-         parallel_finished: true
-workflows:
-  test_objects:
-    jobs:
-      - build
-      - done:
-          requires:
-            - build
+#   done:
+#    docker:
+#      - image: circleci/node:10.0.0
+#      # - image: cimg/python:3.6
+#    steps:
+#      - coveralls/upload:
+#          parallel_finished: true
+# workflows:
+#   test_objects:
+#     jobs:
+#       - build
+#       - done:
+#           requires:
+#             - build
 
 # notify:
 #   webhooks:
