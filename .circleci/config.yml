@@ -24,7 +24,7 @@ jobs:
             coverage run -m pytest
             coverage report
             coverage html
-            cp htmlcov/index.html > ./coverage/lcov.info
+            cp htmlcov/index.html ./coverage/lcov.info
       #       mkdir test-results
       #       pytest --junitxml=test-results/junit.xml
       #
