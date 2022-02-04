@@ -22,7 +22,7 @@ jobs:
             mkdir coverage/
             touch coverage/lcov.info
             coverage run -m pytest
-            coverage report > coverage/lcov.info
+            coverage report
             coverage html
       #       mkdir test-results
       #       pytest --junitxml=test-results/junit.xml
@@ -35,14 +35,14 @@ jobs:
       # - coveralls/upload
       - store_artifacts:
           path: htmlcov
-      - store_artifacts: # upload test coverage as artifact
-          path: ./coverage/lcov.info
-          prefix: tests
+      # - store_artifacts: # upload test coverage as artifact
+      #     path: ./coverage/lcov.info
+      #     prefix: tests
 
   done:
    docker:
-     # - image: circleci/node:10.0.0
-     - image: cimg/python:3.6
+     - image: circleci/node:10.0.0
+     # - image: cimg/python:3.6
    steps:
      - coveralls/upload:
          parallel_finished: true
