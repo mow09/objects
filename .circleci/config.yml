@@ -19,6 +19,8 @@ jobs:
       - run:
           name: Run Tests
           command: |
+            mkdir coverage/
+            touch coverage/lcov.info
             coverage run -m pytest
             coverage report --reporter=text-lcov > coverage/lcov.info
             coverage html
