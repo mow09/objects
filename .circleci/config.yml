@@ -24,7 +24,10 @@ jobs:
             coverage run -m pytest
             coverage report
             coverage html
-            cp htmlcov/index.html ./coverage/lcov.info
+      - run:
+          name: Install and Make
+          command: 'npm install && make test-coverage'
+      # cp htmlcov/index.html ./coverage/lcov.info
       #       mkdir test-results
       #       pytest --junitxml=test-results/junit.xml
       #
@@ -38,8 +41,8 @@ jobs:
           path: htmlcov
       - store_artifacts:
           path: .coverage
-      - store_artifacts:
-          path: ./coverage/lcov.info
+      # - store_artifacts:
+      #     path: ./coverage/lcov.info
       # - coveralls/upload:
       #     file: htmlcov/index.html
       # - store_artifacts: # upload test coverage as artifact
