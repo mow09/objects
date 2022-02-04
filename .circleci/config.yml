@@ -36,11 +36,12 @@ jobs:
       #
       # - store_artifacts:
       #     path: test-results
+      - coveralls/upload:
+          path_to_lcov: htmlcov/status.json
       - store_artifacts:
           path: htmlcov
       - store_artifacts:
           path: .coverage
-      - coveralls/upload
       # - store_artifacts:
       #     path: ./coverage/lcov.info
       # - coveralls/upload:
