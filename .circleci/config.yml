@@ -20,12 +20,14 @@ jobs:
           name: Run Tests
           command: |
             coverage run -m pytest
-            coverage report
+            coverage report --reporter=text-lcov > coverage/lcov.info
             coverage html
       - coveralls/upload
       - store_artifacts:
           path: htmlcov
-#   done:
+      - store_artifacts: # upload test coverage as artifact
+          path: ./coverage/lcov.info
+          prefix: tests#   done:
 #    docker:
 #      # - image: circleci/node:10.0.0
 #      - image: cimg/python:3.6
