@@ -33,11 +33,11 @@ jobs:
       #
       # - store_artifacts:
       #     path: test-results
-      # - coveralls/upload
+      - coveralls/upload
       - store_artifacts:
-          path: htmlcob
-      - coveralls/upload:
-          file: htmlcov/index.html
+          path: htmlcov
+      # - coveralls/upload:
+      #     file: htmlcov/index.html
       # - codecov/upload:
       #     file: html
       # - store_artifacts: # upload test coverage as artifact
