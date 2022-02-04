@@ -23,21 +23,22 @@ jobs:
             coverage run -m pytest
             coverage report
             coverage html
+      - coveralls/upload:
       - store_artifacts:
           path: htmlcov
-  done:
-    docker:
-      - image: circleci/node:10.0.0
-    steps:
-      - coveralls/upload:
-          parallel_finished: true
-workflows:
-  test_objects:
-    jobs:
-      - build
-      - done:
-          requires:
-            - build
+  # done:
+  #   docker:
+  #     - image: circleci/node:10.0.0
+  #   steps:
+  #     - coveralls/upload:
+  #         parallel_finished: true
+# workflows:
+#   test_objects:
+#     jobs:
+#       - build
+#       - done:
+#           requires:
+#             - build
 
 # notify:
 #   webhooks:
