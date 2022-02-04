@@ -22,7 +22,7 @@ jobs:
             mkdir coverage/
             touch coverage/lcov.info
             coverage run -m pytest
-            coverage report --reporter=text-lcov > coverage/lcov.info
+            coverage report > coverage/lcov.info
             coverage html
       #       mkdir test-results
       #       pytest --junitxml=test-results/junit.xml
