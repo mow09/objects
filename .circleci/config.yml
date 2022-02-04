@@ -22,7 +22,7 @@ jobs:
             mkdir coverage/
             touch coverage/lcov.info
             coverage run -m pytest
-            coverage report
+            coverage report > ./coverage/lcov.info
             coverage html
       #       mkdir test-results
       #       pytest --junitxml=test-results/junit.xml
@@ -37,7 +37,8 @@ jobs:
           path: htmlcov
       - store_artifacts:
           path: .coverage
-
+      - store_artifacts:
+          path: report
       # - coveralls/upload:
       #     file: htmlcov/index.html
       # - store_artifacts: # upload test coverage as artifact
