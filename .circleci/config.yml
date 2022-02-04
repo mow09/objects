@@ -22,12 +22,21 @@ jobs:
             coverage run -m pytest
             coverage report --reporter=text-lcov > coverage/lcov.info
             coverage html
+      #       mkdir test-results
+      #       pytest --junitxml=test-results/junit.xml
+      #
+      # - store_test_results:
+      #     path: test-results
+      #
+      # - store_artifacts:
+      #     path: test-results
       - coveralls/upload
       - store_artifacts:
           path: htmlcov
       - store_artifacts: # upload test coverage as artifact
           path: ./coverage/lcov.info
-          prefix: tests#   done:
+          prefix: tests
+  # done:
 #    docker:
 #      # - image: circleci/node:10.0.0
 #      - image: cimg/python:3.6
