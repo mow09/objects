@@ -38,7 +38,7 @@ jobs:
       - store_artifacts:
           path: .coverage
       - store_artifacts:
-          path: report
+          path: ./coverage/lcov.info
       # - coveralls/upload:
       #     file: htmlcov/index.html
       # - store_artifacts: # upload test coverage as artifact
