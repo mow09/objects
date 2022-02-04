@@ -35,7 +35,7 @@ jobs:
       #     path: test-results
       # - coveralls/upload
       - store_artifacts:
-          path: htmlcov
+          path: report
       - codecov/upload:
           file: report
       # - store_artifacts: # upload test coverage as artifact
