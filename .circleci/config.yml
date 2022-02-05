@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
-  coveralls: coveralls/coveralls@1.0.6
+  python: circleci/python@1.0
+  coveralls: coveralls/coveralls@1.0.4
 jobs:
   build:  # required for runs that don't use workflows
     working_directory: ~/objects
