@@ -22,7 +22,7 @@ jobs:
           command: |
             mkdir coverage/
             pip install coveralls
-            coverage run --source=mypkg -m pytest tests/
+            coverage run --source=mypkg -m pytest test/
             coveralls
             coverage-lcov --output_file_path coverage/lcov.info
         # coverage run -m pytest
