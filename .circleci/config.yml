@@ -35,8 +35,9 @@ jobs:
       - store_artifacts:
           path: .coverage
 
-      - coveralls/upload
-      # - coveralls/upload:
+      # - coveralls/upload
+      - coveralls/upload:
+          verbose: true
       #     path_to_lcov: htmlcov/status.json
 
 #   done:  # needs the artifact from build
