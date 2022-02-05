@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
-  python: circleci/python@1.0
-  coveralls: coveralls/coveralls@1.0.4
+  coveralls: coveralls/coveralls@1.0.6
 jobs:
   build:  # required for runs that don't use workflows
     working_directory: ~/objects
@@ -28,17 +27,17 @@ jobs:
             coverage-lcov --data_file_path .coverage
             coverage-lcov --output_file_path coverage/lcov.info
             npm install nyc coveralls
-            echo repo_token: $COVERALLS_REPO_TOKEN > ./.coveralls.yml
 
-      - coveralls/upload
-      # - coveralls/upload:
-      #     path_to_lcov: htmlcov/status.json
       - store_artifacts:
           path: htmlcov
       - store_artifacts:
           path: coverage/lcov.info
       - store_artifacts:
           path: .coverage
+
+      - coveralls/upload
+      # - coveralls/upload:
+      #     path_to_lcov: htmlcov/status.json
 
 #   done:  # needs the artifact from build
 #    docker:
