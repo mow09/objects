@@ -28,6 +28,7 @@ jobs:
             coverage-lcov --data_file_path .coverage
             coverage-lcov --output_file_path coverage/lcov.info
             npm install nyc coveralls
+            echo repo_token: $COVERALLS_REPO_TOKEN > ./.coveralls.yml
 
       - coveralls/upload
       # - coveralls/upload:
