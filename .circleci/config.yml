@@ -1,6 +1,8 @@
 version: 2.1
 # orbs:
 #   coveralls: coveralls/coveralls@1.0.6
+orbs:
+  codecov: codecov/codecov@3.2.2
 jobs:
   build:  # required for runs that don't use workflows
     working_directory: ~/objects
@@ -26,7 +28,7 @@ jobs:
             coverage html
             coverage-lcov --data_file_path .coverage
             coverage-lcov --output_file_path coverage/lcov.info
-
+      - codecov/upload
       - store_artifacts:
           path: htmlcov
       - store_artifacts:
