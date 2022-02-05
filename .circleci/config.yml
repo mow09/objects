@@ -26,6 +26,8 @@ jobs:
             coverage html
             coverage-lcov --data_file_path .coverage
             coverage-lcov --output_file_path coverage/lcov.info
+            echo $COVERALLS_REPO_TOKEN > ./.coveralls.yml
+            cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
       # - run:
       #     name: Install and Make
       #     command: 'npm install && make test-coverage'
