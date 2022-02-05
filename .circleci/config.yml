@@ -27,6 +27,7 @@ jobs:
             coverage-lcov --data_file_path .coverage
             coverage-lcov --output_file_path coverage/lcov.info
             npm install nyc coveralls
+            node --trace-uncaught
 
       - store_artifacts:
           path: htmlcov
