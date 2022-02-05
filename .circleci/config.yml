@@ -26,36 +26,19 @@ jobs:
             coverage html
             coverage-lcov --data_file_path .coverage
             coverage-lcov --output_file_path coverage/lcov.info
-            npm update -g
-      # - run:
-      #     name: Install and Make
-      #     command: 'npm install && make test-coverage'
-      # cp htmlcov/index.html ./coverage/lcov.info
-      #       mkdir test-results
-      #       pytest --junitxml=test-results/junit.xml
-      #
-      # - store_test_results:
-      #     path: test-results
-      #
-      # - store_artifacts:
-      #     path: test-results
+            npm install nyc coveralls
+
       - coveralls/upload
       # - coveralls/upload:
-          # path_to_lcov: htmlcov/status.json
+      #     path_to_lcov: htmlcov/status.json
       - store_artifacts:
           path: htmlcov
       - store_artifacts:
           path: coverage/lcov.info
       - store_artifacts:
           path: .coverage
-      # - store_artifacts:
-      #     path: ./coverage/lcov.info
-      # - coveralls/upload:
-      #     file: htmlcov/index.html
-      # - store_artifacts: # upload test coverage as artifact
-      #     path: ./coverage/lcov.info
-      #     prefix: tests
-#   done:
+
+#   done:  # needs the artifact from build
 #    docker:
 #      - image: circleci/node:10.0.0
 #      # - image: cimg/python:3.6
