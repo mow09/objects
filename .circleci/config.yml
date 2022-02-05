@@ -1,6 +1,6 @@
 version: 2.1
-orbs:
-  coveralls: coveralls/coveralls@1.0.6
+# orbs:
+#   coveralls: coveralls/coveralls@1.0.6
 jobs:
   build:  # required for runs that don't use workflows
     working_directory: ~/objects
@@ -21,27 +21,22 @@ jobs:
           name: Run Tests
           command: |
             mkdir coverage/
-            pip install coveralls
-            coverage run --source=mypkg -m pytest test/
-            coveralls
+            coverage run -m pytest
+            coverage report
+            coverage html
+            coverage-lcov --data_file_path .coverage
             coverage-lcov --output_file_path coverage/lcov.info
-        # coverage run -m pytest
-        # coverage report
-        # coverage html
-        # coverage-lcov --data_file_path .coverage
-        # npm install nyc coveralls
-        # node --trace-uncaught
 
-      # - store_artifacts:
-      #     path: htmlcov
+      - store_artifacts:
+          path: htmlcov
       - store_artifacts:
           path: coverage/lcov.info
-      # - store_artifacts:
-      #     path: .coverage
+      - store_artifacts:
+          path: .coverage
 
       # - coveralls/upload
-      - coveralls/upload:
-          verbose: true
+      # - coveralls/upload:
+      #     verbose: true
       #     path_to_lcov: htmlcov/status.json
 
 #   done:  # needs the artifact from build
